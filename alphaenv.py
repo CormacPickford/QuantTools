@@ -45,7 +45,7 @@ def constricted_momentum(ticker,history,day,i,portfolio):
     elif change < -threshold:
         buy(ticker,day,0.02,'short',i,portfolio)
     else:
-        sell(ticker, history, day, portfolio)
+        sell(ticker,history,day,portfolio)
 
 def week_momentum(ticker,history,day,i,portfolio):
     if day < 6:
@@ -55,16 +55,13 @@ def week_momentum(ticker,history,day,i,portfolio):
     ma_long = sum(history[day-5:day+1]) / 6
 
     if ma_short > ma_long:
-        sell(ticker, history, day, portfolio)
+        sell(ticker,history,day,portfolio)
 
         buy(ticker,day,0.02,'long',i,portfolio)
     elif ma_short < ma_long:
-        sell(ticker, history, day, portfolio)
+        sell(ticker,history,day,portfolio)
 
-        buy(ticker,day,0.02, 'short',i,portfolio)
-
-
+        buy(ticker,day,0.02,'short',i,portfolio)
 
 
 active = copy.deepcopy(constricted_momentum)
-

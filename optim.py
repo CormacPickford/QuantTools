@@ -1,7 +1,5 @@
 
-from data import returns
 import numpy as np
-
 
 class EnsembleOptimiser():
 
@@ -12,10 +10,7 @@ class EnsembleOptimiser():
         self.days = len(records[0])
         self.report = self.calc_ensemble_report()
         self.sharpe, self.ret, self.std = self.calculate_daily_sharpe()
-        self.learning_rate = 0.01
-
-
-
+        self.learning_rate = 0.001
 
     def calculate_daily_sharpe(self):
         days = len(self.report)
@@ -59,7 +54,7 @@ class EnsembleOptimiser():
         return gradient_vector
 
     def update_weights(self):
-        self.weights += self.learning_rate * self.calc_gradient()
+        self.weights -= self.learning_rate * self.calc_gradient()
         self.report = self.calc_ensemble_report()
         self.sharpe, self.ret, self.std = self.calculate_daily_sharpe()
 
@@ -70,13 +65,6 @@ class EnsembleOptimiser():
             report[day] = np.sum(np.array(weighted_records)[:,day])
         return report
 
-
-starting_weights = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0,1]
-model = EnsembleOptimiser(returns,starting_weights)
-for i in range(9000):
-    model.update_weights()
-    print(model.sharpe)
-print(model.weights)
 
 
 

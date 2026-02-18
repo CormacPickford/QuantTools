@@ -26,7 +26,7 @@ class ticker:
 download = False
 data = []
 try:
-    f = open('cache.pickle','rb')
+    f = open(data_path,'rb')
     allthing = pickle.load(f)
     f.close()
     for i in range(len(allthing)):
@@ -46,7 +46,7 @@ if download:
     for each in universe:
         everything.append(ticker(each, data))
         print(each)
-    f = open('cache.pickle', 'wb')
+    f = open(data_path, 'wb')
     pickle.dump(everything, f)
     f.close()
 

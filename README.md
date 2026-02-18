@@ -1,2 +1,0 @@
-# QuantTools
-TBD
